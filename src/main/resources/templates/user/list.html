@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/layout :: htmlhead(~{::title})">
+    <title>利用者の一覧</title>
+</head>
+<body>
+<div class="ui container">
+
+    <div class="ui vertical segment">
+        <h1 class="ui header">利用者の一覧</h1>
+    </div>
+
+
+    <div class="ui basic segment">
+        <a class="ui positive basic button"
+           th:href="@{/user/register}">利用者の新規登録</a>
+    </div>
+
+    <div class="ui basic segment">
+
+        <table class="ui celled table">
+            <thead>
+            <tr>
+                <th>利用者ID</th>
+                <th>メールアドレス</th>
+                <th>利用者名</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users.value}">
+                <td th:text="${user.userIdentifierName.value}"/>
+                <td th:text="${user.userMailAddress.value}"/>
+                <td th:text="${user.userLastName.value}"/>
+                <td>
+                    <a class="ui negative basic button"
+                       th:href="@{/user/{userId}/delete/view(userId=${user.userIdentifierNumber.value})}">削除</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<footer th:include="fragments/layout :: footer"/>
+</body>
+</html>
