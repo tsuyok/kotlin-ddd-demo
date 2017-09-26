@@ -1,20 +1,23 @@
 package example.presentation.controller.user
 
-import example.domain.fundamental.user.UserIdentifierName
-import example.domain.fundamental.user.UserMailAddress
 import example.domain.model.user.UserRepository
 import example.presentation.view.user.UserRegisterForm
+import example.presentation.view.user.UserRegisterValidation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestMapping
 
 
 @Controller
 @RequestMapping("/user")
-class UserRegisterController(@Autowired private val userRepository: UserRepository) {
+class UserRegisterController(@Autowired private val userRepository: UserRepository,
+                             @Autowired private val userRegisterValidation: UserRegisterValidation) {
 
     @GetMapping("/register")
     fun form(model: Model): String {
@@ -25,38 +28,12 @@ class UserRegisterController(@Autowired private val userRepository: UserReposito
     @PostMapping("/confirm")
     fun validate(@Validated @ModelAttribute("userRegisterForm") userRegisterForm: UserRegisterForm,
                      result: BindingResult): String {
-        if (result.hasErrors()) return "user/form";
 
-        if(userRepository.isExists(UserIdentifierName(userRegisterForm.userIdentifierName)))
-            return alreadyExistsByUserIdentifierName(userRegisterForm.userIdentifierName, result)
-        
-        if(userRepository.isExists(UserMailAddress(userRegisterForm.userMailAddress)))
-            return alreadyExistsByUserMailAddress(userRegisterForm.userMailAddress, result)
+        if(!userRegisterValidation.validate(userRegisterForm, result)) return "user/form"
 
         userRepository.register(userRegisterForm.toUser())
 
         return "user/complete"
     }
-
-
-
-    private fun alreadyExistsByUserMailAddress(userMailAddress: String, result: BindingResult): String {
-        val rejectedPath = "userMailAddress"
-        val messageKey = "error.id.already.exists"
-        val arguments = arrayOf<Any>(userMailAddress)
-        val defaultMessage = "{0}は登録済みです"
-        result.rejectValue(rejectedPath, messageKey, arguments, defaultMessage)
-        return "user/form"
-    }
-
-    private fun alreadyExistsByUserIdentifierName(userIdentifierName: String, result: BindingResult): String {
-        val rejectedPath = "userIdentifierName"
-        val messageKey = "error.id.already.exists"
-        val arguments = arrayOf<Any>(userIdentifierName)
-        val defaultMessage = "{0}は登録済みです"
-        result.rejectValue(rejectedPath, messageKey, arguments, defaultMessage)
-        return "user/form"
-    }
-
 
 }
