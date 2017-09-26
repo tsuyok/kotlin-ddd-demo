@@ -13,7 +13,7 @@
     <div class="ui vertical segment">
         <form id="custom-form" class="ui form" name="body"
               method="post" action="#"
-              th:object="${userRegisterForm}" th:action="@{/user/register}">
+              th:object="${userRegisterForm}" th:action="@{/user/confirm}">
 
             <div class="ui vertical segment">
                 <div th:replace="fragments/form/input::macro('userIdentifierName','利用者ID','yasuda')">
