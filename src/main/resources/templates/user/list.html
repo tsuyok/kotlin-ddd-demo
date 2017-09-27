@@ -24,7 +24,6 @@
                 <th>利用者ID</th>
                 <th>メールアドレス</th>
                 <th>利用者名</th>
-                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -32,10 +31,6 @@
                 <td th:text="${user.userIdentifierName.value}"/>
                 <td th:text="${user.userMailAddress.value}"/>
                 <td th:text="${user.userLastName.value}"/>
-                <td>
-                    <a class="ui negative basic button"
-                       th:href="@{/user/{userId}/delete/view(userId=${user.userIdentifierNumber.value})}">削除</a>
-                </td>
             </tr>
             </tbody>
         </table>
