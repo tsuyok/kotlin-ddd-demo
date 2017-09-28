@@ -23,6 +23,8 @@ temp
 # backup files
 *.un~
 
-
 # log files
 *.log
+
+# resource sample file
+**/resources/config/application.yml
