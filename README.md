@@ -1,4 +1,5 @@
-# Kotlin + Spring Boot sample project
+# Kotlin + DDD + Spring Boot sample project
+Kotlinでドメイン駆動設計でアプリケーションを作るための雛形を作ってみました。設計思想は増田亨さんのDDDをベースにしています。
 ```
 cp src/main/resources/config/application.yml.sample src/main/resources/config/application.yml
 docker-compose up -d
