@@ -3,7 +3,7 @@ package example.infrastracture.datasource.user
 import example.domain.fundamental.user.*
 import example.domain.model.user.User
 
-class UserRecordDTO(val userIdentifierNumber: Int,
+data class UserRecordDTO(val userIdentifierNumber: Int,
                     val userIdentifierName: String,
                     val userMailAddress: String,
                     val userFirstName: String,
