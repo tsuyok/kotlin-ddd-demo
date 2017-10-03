@@ -5,3 +5,18 @@ spring:
     username: root
     password: ""
     url: "jdbc:mysql://127.0.0.1:3306/kotlin_sample?characterEncoding=UTF8&useSSL=false"
+security:
+  oauth2:
+    client:
+      clientId: ${google.client.id}
+      clientSecret: ${google.client.secret}
+      accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      clientAuthenticationScheme: form
+      scope:
+        - openid
+        - email
+        - profile
+    resource:
+      userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+      preferTokenInfo: true

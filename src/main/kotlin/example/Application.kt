@@ -17,8 +17,7 @@ class Application : WebSecurityConfigurerAdapter() {
         http
                 .antMatcher("/**")
                 .authorizeRequests().antMatchers("/", "/login**").permitAll()
-                .anyRequest()
-                .authenticated()
+                .anyRequest().authenticated()
                 .and()
                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
@@ -27,6 +26,8 @@ class Application : WebSecurityConfigurerAdapter() {
                 .invalidateHttpSession(true)
                 .permitAll()
     }
+
+
 }
 
 fun main(args: Array<String>) {
