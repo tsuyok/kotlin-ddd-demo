@@ -1,7 +1,3 @@
 package example.domain.fundamental.user
 
-import lombok.ToString
-
-@ToString
-class UserLastName(val value: String) {
-}
+data class UserLastName(val value: String)
