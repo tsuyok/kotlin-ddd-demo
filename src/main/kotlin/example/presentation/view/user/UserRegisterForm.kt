@@ -16,6 +16,9 @@ class UserRegisterForm {
     var userMailAddress: String = ""
 
     @NotBlank(message = "必ず入力してください")
+    var userPassword: String = ""
+
+    @NotBlank(message = "必ず入力してください")
     var userFirstName: String = ""
 
     @NotBlank(message = "必ず入力してください")
@@ -26,6 +29,7 @@ class UserRegisterForm {
                 UserIdentifierNumber(null),
                 UserIdentifierName(userIdentifierName),
                 UserMailAddress(userMailAddress),
+                UserPassword(userPassword),
                 UserFirstName(userFirstName),
                 UserLastName(userLastName)
         )

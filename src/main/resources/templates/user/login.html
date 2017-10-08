@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/layout :: htmlhead(~{::title})">
+    <title>ログイン</title>
+</head>
+<body>
+<div class="ui container">
+
+    <div class="ui vertical segment">
+        <h1 class="ui header">ログイン</h1>
+    </div>
+
+    <div class="ui vertical segment">
+        <form id="custom-form" class="ui form" name="body"
+              method="post" action="#" th:action="@{/login/user}">
+
+            <div class="ui vertical segment">
+                <div th:replace="fragments/form/input::macro('mailaddress','メールアドレス','yasuda@yasuda.com')">
+                    <label>ID</label>
+                    <input type="text">
+                </div>
+                <div th:replace="fragments/form/password::macro('password','パスワード')">
+                    <label>ID</label>
+                    <input type="text">
+                </div>
+                <div class="ui basic segment">
+                    <button type="submit" class="ui positive basic button">ログイン</button>
+                </div>
+            </div>
+        </form>
+        <div class="ui basic segment">
+            <a class="ui positive basic button"
+               th:href="@{/login/google}">Googleアカウントでログイン</a>
+        </div>
+
+    </div>
+</div>
+
+<footer th:include="fragments/layout :: footer"/>
+</body>
+</html>
